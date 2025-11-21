@@ -1,9 +1,10 @@
 # Change Log
 
-## 2.1.3 / 2024-03-28
+## 2.1.3 / 2025-11-21
 
 * Improved comments.
 * Improved PluginMetaLogger.new_logger debug output.
+* Fixed initial log level always being INFO
 
 
 ## 2.1.2 / 2023-11-21
