@@ -41,8 +41,7 @@ module Support
     def remove_html_tags(string)
       string.gsub(/<[^>]*>/, '')
     end
-
-    JekyllPluginHelper.register(self, NAME)
-    PluginMetaLogger.instance.info { "Loaded #{NAME} #{VERSION} plugin." }
   end
 end
+
+Liquid::Template.register_tag(Support::InlineTag::NAME, Support::InlineTag)

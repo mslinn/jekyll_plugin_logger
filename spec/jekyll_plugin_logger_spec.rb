@@ -53,9 +53,10 @@ class MyTestPlugin
   end
 
   RSpec.describe PluginLogger do
-    it 'outputs at info level' do
+    it 'defaults to warn level when no config' do
       MyTestPlugin.exercise(PluginMetaLogger.instance.new_logger(self, PluginMetaLogger.instance.config, $stdout))
-      expect(PluginMetaLogger.instance.level_as_sym).to eq(:info)
+      # Default level is :warn when no config is provided (suppresses INFO during gem loading)
+      expect(PluginMetaLogger.instance.level_as_sym).to eq(:warn)
     end
 
     it 'uses config debug' do

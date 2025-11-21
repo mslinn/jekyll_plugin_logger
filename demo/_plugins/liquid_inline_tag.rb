@@ -47,5 +47,4 @@ module Raw
   end
 
   Liquid::Template.register_tag(NAME, Raw::InlineTag)
-  PluginMetaLogger.instance.info { "Loaded #{NAME} #{VERSION} plugin." }
 end

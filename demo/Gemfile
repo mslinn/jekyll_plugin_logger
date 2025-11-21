@@ -6,8 +6,9 @@ group :jekyll_plugins do
   gem 'classifier-reborn'
   gem 'html-proofer'
   gem 'jekyll-assets', git: 'https://github.com/envygeeks/jekyll-assets'
+  gem 'jekyll_draft'
   gem 'jekyll-environment-variables'
-  gem 'jekyll_plugin_logger', path: '../'  # use unreleased gem dependencies defined in the parent project
+  gem 'jekyll_plugin_logger', path: '../' # use unreleased gem dependencies defined in the parent project
   gem 'jekyll_plugin_support', '>= 0.8.0'
   gem 'jekyll-tagging'
 end

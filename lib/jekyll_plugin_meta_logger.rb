@@ -31,6 +31,7 @@ require 'singleton'
 class PluginMetaLogger
   include Singleton
   attr_reader :config, :logger
+  attr_writer :logger
 
   def initialize
     super
@@ -39,10 +40,12 @@ class PluginMetaLogger
   end
 
   def info(&block)
+    # Delegate to @logger which respects the configured level
     @logger.info(self) { yield block }
   end
 
   def debug(&block)
+    # Delegate to @logger which respects the configured level
     @logger.debug(self) { yield block }
   end
 

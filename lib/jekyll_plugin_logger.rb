@@ -41,7 +41,8 @@ class PluginLogger
 
     @logger = Logger.new stream_name
     @logger.progname = derive_progname klass
-    @logger.level = :info
+    # Default to :warn when no config, so INFO messages are suppressed until config is loaded
+    @logger.level = (config.nil? || config.empty?) ? :warn : :info
     @logger.level = plugin_loggers[@logger.progname] if plugin_loggers&.[] @logger.progname
     # puts "PluginLogger.initialize: @logger.progname=#{@logger.progname} set to #{@logger.level}".red
     @logger.formatter = proc { |severity, _datetime, progname, msg|
@@ -150,9 +151,9 @@ end
 # and stores a reference to the configuration information in `PluginMetaLogger.instance.config` for when loggers are
 # created in the future.
 # The `site.config` information is used by `PluginLogger.initialize` to automatically configure new loggers.
-Jekyll::Hooks.register(:site, :after_reset, priority: :high) do |site|
+Jekyll::Hooks.register(:site, :after_init, priority: :high) do |site|
   instance = PluginMetaLogger.instance
-  logger = instance.new_logger(PluginMetaLogger, site.config)
-  logger.info { "Loaded #{JekyllPluginLoggerName::PLUGIN_NAME} v#{JekyllPluginLoggerVersion::VERSION} plugin." }
-  logger.debug { "Logger for #{instance.logger.progname} created at level #{instance.level_as_sym}" }
+  instance.logger = instance.new_logger(PluginMetaLogger, site.config)
+  instance.logger.info { "Loaded #{JekyllPluginLoggerName::PLUGIN_NAME} v#{JekyllPluginLoggerVersion::VERSION} plugin." }
+  instance.logger.debug { "Logger for #{instance.logger.progname} created at level #{instance.level_as_sym}" }
 end

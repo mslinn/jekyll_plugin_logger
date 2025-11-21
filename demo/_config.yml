@@ -28,7 +28,7 @@ liquid:
   # strict_filters: true
   # strict_variables: true
 plugin_loggers:
-  PluginMetaLogger: info
+  PluginMetaLogger: warn
   CleanHook: warn
   DocumentHooks: warn
   PluginLogger: off
